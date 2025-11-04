@@ -4,8 +4,10 @@ from torch import nn
 class DenseModel(nn.Module):
     def __init__(self, n_state, n_action):
         super(DenseModel, self).__init__()
-        raise NotImplementedError
-        ### Todo 14
+        self.fc1 = nn.Linear(64,64)
+        self.fc2 = nn.Linear(64,64)
+        self.fc3 = nn.Linear(64,4)
+        self.activation = nn.ReLU()
         
     def forward(self, x):
         x = torch.flatten(x, start_dim=1)

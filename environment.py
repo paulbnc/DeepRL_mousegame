@@ -119,7 +119,7 @@ class Environment(nn.Module):
         game_over = self.t > self.max_time
 
         ### Todo 13
-        state = torch.zeros(1)    
+        state = self.get_state()
 
         return state, reward, game_over
 
@@ -151,6 +151,6 @@ class Environment(nn.Module):
         self.position[-2:, :] = -1
 
         ### Todo 13
-        state = torch.zeros(1)
+        state = self.get_state()
 
         return state

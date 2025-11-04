@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 from torch import nn
-
+from random import randint
 from models import DenseModel, CNNModel
 
 class Memory(object):
@@ -83,7 +83,7 @@ class RandomAgent(Agent):
 
     def learned_act(self, s):
         ### To do 10
-        raise NotImplementedError
+        return randint(0,3)
 
 
 class DQN(Agent):
