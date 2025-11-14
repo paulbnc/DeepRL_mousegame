@@ -150,7 +150,6 @@ class Environment(nn.Module):
         self.position[-2:, :] = -1
         self.position[-2:, :] = -1
 
-        ### Todo 13
         state = self.get_state()
 
         return state

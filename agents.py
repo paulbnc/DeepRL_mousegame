@@ -82,7 +82,6 @@ class RandomAgent(Agent):
         self.trainable = False
 
     def learned_act(self, s):
-        ### To do 10
         return randint(0,3)
 
 
@@ -110,11 +109,13 @@ class DQN(Agent):
             self.model = CNNModel(self.n_state, self.n_action)
         
         self.trainable = True
+
+        self.loss = nn.MSELoss()
         
         
     def learned_act(self, s):
-        raise NotImplementedError
-        ### Todo 15
+        output = self.model.forward(s)
+        return torch.argmax(output)
 
     def reinforce(self, s_, n_s_, a_, r_, game_over_):
         # Two steps: first memorize the states, second learn from the pool, batched
@@ -139,8 +140,11 @@ class DQN(Agent):
         
         # HINT: Clip the target to avoid exploiding gradients.. -- clipping is a bit tighter
         target_q = torch.clamp(target_q, -3, 3)
-        raise NotImplementedError
-        ### Todo 16
+        
+        q_pred = self.model(n_s_)
+        loss = self.loss(q_pred, target_q)
+
+        return loss
 
   
 

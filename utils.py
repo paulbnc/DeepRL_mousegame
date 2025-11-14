@@ -44,8 +44,7 @@ def plot_model(env, args, name):
 
 def get_optimizer(model, lr, optimizer):
     if optimizer == 'SGD':
-        raise NotImplementedError
-        ### Todo 17
+        return torch.optim.SGD(model.parameters(), lr=lr, weight_decay=1e-4, momentum=0.0)
     elif optimizer == 'Adam':
         return torch.optim.Adam(model.parameters(), lr=lr, weight_decay=1e-4)
     elif optimizer == 'RMSprop':

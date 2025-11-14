@@ -2,14 +2,16 @@ import torch
 from torch import nn            
 
 class DenseModel(nn.Module):
-    def __init__(self, n_state, n_action):
+    def __init__(self, n_state, n_action, vision=5):
         super(DenseModel, self).__init__()
-        self.fc1 = nn.Linear(64,64)
+        self.fc1 = nn.Linear(n_state*vision*vision,64)
         self.fc2 = nn.Linear(64,64)
-        self.fc3 = nn.Linear(64,4)
+        self.fc3 = nn.Linear(64,n_action)
         self.activation = nn.ReLU()
         
     def forward(self, x):
+        if x.dim() == 3:
+            x = x.unsqueeze(0)
         x = torch.flatten(x, start_dim=1)
         x = x.view(x.size(0), -1)
         x = self.activation(self.fc1(x))
