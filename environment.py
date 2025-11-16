@@ -15,10 +15,12 @@ class Environment(nn.Module):
         self.temperature = args.temperature
         self.device = device
         self.args = args
+        self.back_penalization = 0.2
 
         # board on which one plays
         self.board = torch.zeros((grid_size,grid_size), device=device)
         self.position = torch.zeros((grid_size,grid_size), device=device)
+        self.malus_position = torch.zeros((grid_size,grid_size), device=device)
 
         self.x = 0
         self.y = 0
@@ -109,8 +111,7 @@ class Environment(nn.Module):
         reward = self.board[self.x, self.y].item() 
 
         if self.args.explore and self.training:
-            raise NotImplementedError
-            ### Todo 22
+            reward -= self.back_penalization
 
         self.board[self.x, self.y] = 0
         self.position[self.x, self.y] = 1 # Update the visited position state
@@ -118,7 +119,6 @@ class Environment(nn.Module):
 
         game_over = self.t > self.max_time
 
-        ### Todo 13
         state = self.get_state()
 
         return state, reward, game_over

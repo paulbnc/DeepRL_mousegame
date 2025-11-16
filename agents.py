@@ -33,6 +33,7 @@ class Agent(nn.Module):
         super(Agent, self).__init__()
         self.epsilon = args.epsilon
         self.n_action = 4
+        self.vision = 5
 
     def forward(self, s):
         return self.act(s)

@@ -1,10 +1,9 @@
 from utils import save_model, plot_model
 
-def train_model(env, agent, optimizer, args, log):   
+def train_model(env, agent, optimizer, args, log, decay_fact=0.95):   
     for e in range(args.epoch):
         if args.explore:
-            raise NotImplementedError
-            ### Todo 21
+            agent.epsilon *= decay_fact
 
         # At each epoch, we restart to a fresh game and get the initial state
         state = env.reset()
@@ -16,8 +15,7 @@ def train_model(env, agent, optimizer, args, log):
 
         while not game_over:
             if args.explore:
-                raise NotImplementedError
-                ### Todo 21
+                agent.epsilon *= decay_fact
 
             optimizer.zero_grad()
 
