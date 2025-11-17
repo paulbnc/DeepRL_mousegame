@@ -4,6 +4,8 @@ def train_model(env, agent, optimizer, args, log, decay_fact=0.95):
     for e in range(args.epoch):
         if args.explore:
             agent.epsilon *= decay_fact
+            if agent.epsilon<0.1:
+                agent.epsilon = 0.1
 
         # At each epoch, we restart to a fresh game and get the initial state
         state = env.reset()
@@ -16,6 +18,8 @@ def train_model(env, agent, optimizer, args, log, decay_fact=0.95):
         while not game_over:
             if args.explore:
                 agent.epsilon *= decay_fact
+                if agent.epsilon<0.1:
+                    agent.epsilon = 0.1
 
             optimizer.zero_grad()
 

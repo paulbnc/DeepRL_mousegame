@@ -3,7 +3,7 @@ import torch
 import imageio
 import logging
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 from PIL import Image
 
@@ -12,7 +12,7 @@ def logger(args):
         return print
     elif args.log_type == 'file':
         filename = os.path.join("experiments", args.path, "info.log")
-        logFormatter = logging.Formatter(fmt=' %(name)s :: %(levelname)s :: %(message)s')
+        #logFormatter = logging.Formatter(fmt=' %(name)s :: %(levelname)s :: %(message)s')
         logging.basicConfig(filename=filename, 
                             level=logging.INFO, 
                             format='%(asctime)s %(message)s', filemode='w',
